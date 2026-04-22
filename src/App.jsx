@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import {
   Check, X, ChevronLeft, ChevronRight, Dumbbell,
   Zap, Mountain, Coffee, Trophy, Target, Activity, Flag,
@@ -330,6 +330,20 @@ export default function App() {
   const { weekNum: todayWeek, dayKey: todayDay, isBeforeStart } = useMemo(() => getCurrentWeekAndDay(), []);
   const [viewWeek, setViewWeek] = useState(todayWeek);
   const [expandedKey, setExpandedKey] = useState(null);
+  const touchStartX = useRef(null);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) < 50) return;
+    if (delta > 0) setViewWeek(w => Math.min(TOTAL_WEEKS, w + 1));
+    else setViewWeek(w => Math.max(1, w - 1));
+    touchStartX.current = null;
+  };
 
   // Persist on change
   useEffect(() => {
@@ -475,6 +489,7 @@ export default function App() {
         </div>
 
         {/* ============ DAY CARDS ============ */}
+        <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {week.tbd ? (
           <div className="p-8 text-center rounded-2xl border border-dashed" style={{ borderColor: '#3a3026' }}>
             <Hourglass className="w-6 h-6 mx-auto mb-3 text-stone-500"/>
@@ -512,6 +527,7 @@ export default function App() {
             })}
           </div>
         )}
+        </div>
 
         {/* ============ FOOTER STATS ============ */}
         <div className="mt-10 pt-8 border-t grid grid-cols-3 gap-3 sm:gap-6" style={{ borderColor: '#2a2420' }}>
