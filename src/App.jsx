@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
+import confetti from 'canvas-confetti';
 import {
   Check, X, ChevronLeft, ChevronRight, Dumbbell,
   Zap, Mountain, Coffee, Trophy, Target, Activity, Flag,
@@ -345,6 +346,11 @@ export default function App() {
     touchStartX.current = null;
   };
 
+  const fireWeekConfetti = () => {
+    confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#f59e0b', '#10b981', '#fb923c', '#fef3c7'] });
+    setTimeout(() => confetti({ particleCount: 40, spread: 80, origin: { y: 0.5 }, colors: ['#f59e0b', '#10b981'] }), 250);
+  };
+
   // Persist on change
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(status)); } catch { /* ignore */ }
@@ -519,7 +525,7 @@ export default function App() {
                   expanded={expanded || isHero}
                   canCollapse={!isHero}
                   onToggleExpand={() => setExpandedKey(expanded ? null : key)}
-                  onMarkDone={() => setKey(viewWeek, dk, st === 'done' ? null : 'done')}
+                  onMarkDone={() => { if (dk === 'sat' && st !== 'done') fireWeekConfetti(); setKey(viewWeek, dk, st === 'done' ? null : 'done'); }}
                   onMarkMissed={() => setKey(viewWeek, dk, st === 'missed' ? null : 'missed')}
                   phaseColor={phase.accent}
                 />
