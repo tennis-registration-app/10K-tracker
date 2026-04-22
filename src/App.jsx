@@ -332,18 +332,22 @@ export default function App() {
   const [viewWeek, setViewWeek] = useState(todayWeek);
   const [expandedKey, setExpandedKey] = useState(null);
   const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e) => {
     if (touchStartX.current === null) return;
-    const delta = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) < 50) return;
-    if (delta > 0) setViewWeek(w => Math.min(TOTAL_WEEKS, w + 1));
-    else setViewWeek(w => Math.max(1, w - 1));
+    const dx = touchStartX.current - e.changedTouches[0].clientX;
+    const dy = touchStartY.current - e.changedTouches[0].clientY;
     touchStartX.current = null;
+    touchStartY.current = null;
+    if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+    if (dx > 0) setViewWeek(w => Math.min(TOTAL_WEEKS, w + 1));
+    else setViewWeek(w => Math.max(1, w - 1));
   };
 
   const fireWeekConfetti = () => {
@@ -388,7 +392,7 @@ export default function App() {
   }, [status]);
 
   return (
-    <div style={{ fontFamily: 'Manrope, system-ui, sans-serif', backgroundColor: '#0f0d0b', color: '#eae6e0', minHeight: '100dvh' }}>
+    <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} style={{ fontFamily: 'Manrope, system-ui, sans-serif', backgroundColor: '#0f0d0b', color: '#eae6e0', minHeight: '100dvh' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
 
         {/* ============ HEADER ============ */}
@@ -495,7 +499,6 @@ export default function App() {
         </div>
 
         {/* ============ DAY CARDS ============ */}
-        <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         {week.tbd ? (
           <div className="p-8 text-center rounded-2xl border border-dashed" style={{ borderColor: '#3a3026' }}>
             <Hourglass className="w-6 h-6 mx-auto mb-3 text-stone-500"/>
@@ -533,7 +536,6 @@ export default function App() {
             })}
           </div>
         )}
-        </div>
 
         {/* ============ FOOTER STATS ============ */}
         <div className="mt-10 pt-8 border-t grid grid-cols-3 gap-3 sm:gap-6" style={{ borderColor: '#2a2420' }}>
