@@ -392,7 +392,7 @@ export default function App() {
   }, [status]);
 
   return (
-    <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} style={{ fontFamily: 'Manrope, system-ui, sans-serif', backgroundColor: '#0f0d0b', color: '#eae6e0', minHeight: '100dvh' }}>
+    <div style={{ fontFamily: 'Manrope, system-ui, sans-serif', backgroundColor: '#0f0d0b', color: '#eae6e0', minHeight: '100dvh' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
 
         {/* ============ HEADER ============ */}
@@ -464,7 +464,7 @@ export default function App() {
         </div>
 
         {/* ============ WEEK NAV ============ */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <button
             onClick={() => setViewWeek(w => Math.max(1, w - 1))}
             disabled={viewWeek === 1}
