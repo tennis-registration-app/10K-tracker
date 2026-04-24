@@ -116,11 +116,11 @@ const WEEKS = [
   // ======== PHASE 2 ========
   { n: 7, phase: 2, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 18 min @ 8:05–8:10', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '2 × 18 min @ 8:05–8:10', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'Tuesday threshold as prescribed — unaffected by Saturday race.' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('racepace', '4 × 1 mi @ 7:55–8:00', { recovery: '90 sec rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '8 mi with 2 mi finish @ 8:20–8:30'),
+    thu: D('strides', '3 mi easy + 4 strides', { note: 'Pre-race tune-up. NO post-run lifting — race Saturday.' }),
+    fri: D('rest', 'Rest'),
+    sat: D('race', '5K RACE — New Orleans (May 23)', { warmup: '2 mi easy, 2nd mile pick up slightly, 3–4 strides in final 400m', cooldown: '1 mi easy', note: 'Target 7:24–7:33/mi (~23:00–23:30). ~6.1 mi total with warmup/cooldown. Heat may require running effort over watch if conditions are severe. Result confirms Phase 2 is tracking.' }),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
   { n: 8, phase: 2, days: {
@@ -172,11 +172,11 @@ const WEEKS = [
   // ======== PHASE 3 ========
   { n: 13, phase: 3, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 15 min @ 7:55–8:00', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '2 × 15 min @ 7:55–8:00', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'Tuesday threshold as prescribed — unaffected by Saturday race.' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '5 × 3 min @ 7:20–7:30', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'HR will hit 170–176. Expected and appropriate.', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9–10 mi with 3 mi finish @ 8:10–8:20'),
+    thu: D('strides', '3 mi easy + 4 strides', { note: 'Pre-race tune-up. NO post-run lifting — race Saturday.' }),
+    fri: D('rest', 'Rest'),
+    sat: D('race', '4-MILE RACE — Massachusetts (July 4)', { warmup: '2 mi easy, 2nd mile pick up slightly, 3–4 strides in final 400m', cooldown: '1 mi easy', note: 'Target 7:35–7:45/mi. 7 mi total with warmup/cooldown. Optimal conditions expected — run the watch directly. Confirms Phase 3 conversion is on track.' }),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
   { n: 14, phase: 3, days: {
