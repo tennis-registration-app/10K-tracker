@@ -15,23 +15,23 @@ const TOTAL_WEEKS = 30;
 const STORAGE_KEY = 'workout-status';
 
 const PHASES = [
-  { num: 1, name: 'Threshold Foundation',     weeks: [1, 2, 3, 4, 5, 6],
-    goal: 'Make 8:10–8:15 pace feel controlled and repeatable for 20+ minutes continuously.',
-    checkpoint: '20 min continuous at 8:10–8:15, HR <168, no significant drift.',
+  { num: 1, name: 'Threshold Foundation',       weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    goal: 'Build sustained-pace durability to 22 min continuous at 8:13–8:18.',
+    checkpoint: '22 min continuous @ 8:13–8:18, HR <168, no significant fade. (Tue Jun 9)',
     accent: '#d97706' },
-  { num: 2, name: 'Race Durability',          weeks: [7, 8, 9, 10, 11, 12],
+  { num: 2, name: 'Race Durability',            weeks: [11, 12, 13, 14, 15, 16],
     goal: 'Sustain race-relevant pace under accumulating fatigue. Addresses the miles 4–6 fade.',
-    checkpoint: '2 × 2 mi @ 8:00–8:05, 3 min recovery, HR controlled through Rep 2.',
+    checkpoint: '2 × 2 mi @ 8:05–8:10, 3 min recovery, HR controlled through Rep 2. (Tue Jul 21)',
     accent: '#ea580c' },
-  { num: 3, name: 'Race-Specific Conversion', weeks: [13, 14, 15, 16, 17, 18],
-    goal: 'Make 7:50 pace feel like 8:15 felt in Phase 1.',
-    checkpoint: '3 × 2 mi @ 7:50–7:55 without fade in third rep.',
+  { num: 3, name: 'Race-Specific Conversion',   weeks: [17, 18, 19, 20, 21, 22],
+    goal: 'Make 8:00 pace feel like 8:15 felt in Phase 1.',
+    checkpoint: '3 × 2 mi @ 7:55–8:00, no fade in third rep. HR peak 168–172 acceptable. (Tue Sep 1)',
     accent: '#dc2626' },
-  { num: 4, name: '5-Mile Prep + Taper',      weeks: [19, 20, 21, 22, 23, 24],
-    goal: 'Convert Phase 3 fitness into a 5-mile race result. Use the race as calibration.',
-    checkpoint: '5-mile race @ 7:50–7:55 (~39:10–39:35).',
+  { num: 4, name: '5-Mile Calibration + Taper', weeks: [23, 24, 25, 26, 27, 28],
+    goal: 'Convert Phase 3 fitness into a 5-mile race result. Use the race to calibrate the final 10K block.',
+    checkpoint: '5-mile race @ 7:55–8:00/mi. (Sat Oct 17)',
     accent: '#b91c1c' },
-  { num: 5, name: '10K Specific Block',       weeks: [25, 26, 27, 28, 29, 30],
+  { num: 5, name: '10K Specific Block',         weeks: [29, 30],
     goal: 'Final conversion: 10K-specific work → taper → goal race.',
     checkpoint: '10K @ 7:45/mi (~48:00).',
     accent: '#7c2d12' },
@@ -113,179 +113,252 @@ const WEEKS = [
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
 
-  // ======== PHASE 2 ========
-  { n: 7, phase: 2, days: {
+  // ======== PHASE 1 EXTENDED — weeks 7 & 8-10 bridge ========
+  { n: 7, phase: 1, days: {
     mon: D('rest', 'Rest or easy 30 min'),
     tue: D('threshold', '2 × 18 min @ 8:05–8:10', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
     thu: D('racepace', '4 × 1 mi @ 7:55–8:00', { recovery: '90 sec rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '8 mi with 2 mi finish @ 8:20–8:30'),
+    sat: D('race', '5K Race', { note: 'Race day — May 23. Run by effort.' }),
+    sun: D('easy', 'Easy 3 mi or rest', { note: 'Post-race recovery. HR ≤140.' }),
+  }},
+
+  // ---- Bridge Week B1 (May 25–31) ----
+  { n: 8, phase: 1, days: {
+    mon: D('rest', 'Rest or easy 30 min', { note: 'Transition / post-race recovery.' }),
+    tue: D('threshold', '2 × 12 min @ 8:13–8:18', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'HR ceiling 168.' }),
+    wed: D('easy', 'Easy 3–4 mi', { note: 'HR ≤140.' }),
+    thu: D('speed', '4 × 3 min @ 7:45–7:50', { recovery: '2:30 jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '7 mi, last 1.5 mi @ 8:30–8:45', { note: 'First 1.5–2 mi easy as warmup.' }),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 8, phase: 2, days: {
+
+  // ---- Bridge Week B2 (Jun 1–7) ----
+  { n: 9, phase: 1, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '25 min continuous @ 8:05', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '18 min continuous @ 8:13–8:18', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'HR ceiling 168.' }),
+    wed: D('easy', 'Easy 3–4 mi', { note: 'HR ≤140.' }),
+    thu: D('speed', '4 × 3 min @ 7:45–7:50', { recovery: '2:30 jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '7 mi, last 1.5 mi @ 8:30–8:45'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- Bridge Week B3 (Jun 8–14) — CHECKPOINT ----
+  { n: 10, phase: 1, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '22 min continuous @ 8:13–8:18', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy', checkpoint: true, note: 'CHECKPOINT: HR <168, no fade. Clears Phase 1 if met.' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('speed', '5 × 2 min @ 7:45–7:55', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'Lighter session — checkpoint week.', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '6 mi easy', { note: 'Reduced mileage — checkpoint week.' }),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ======== PHASE 2 — Race Durability ========
+  // ---- P2 Week 1 (Jun 15–21) ----
+  { n: 11, phase: 2, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '2 × 18 min @ 8:10–8:15', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
     thu: D('racepace', '4 × 1 mi @ 7:55–8:00', { recovery: '90 sec rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '8 mi with 2 mi finish @ 8:20–8:30'),
+    sat: D('long', '8 mi, last 2 mi @ 8:20–8:30'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 9, phase: 2, days: {
+
+  // ---- P2 Week 2 (Jun 22–28) ----
+  { n: 12, phase: 2, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '3 × 10 min @ 8:00–8:05', { recovery: '90 sec jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '25 min continuous @ 8:10', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('racepace', '4 × 1 mi @ 7:55–8:00', { recovery: '90 sec rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '8 mi, last 2 mi @ 8:20–8:30'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- P2 Week 3 (Jun 29 – Jul 5) — July 4 Race ----
+  { n: 13, phase: 2, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '3 × 10 min @ 8:05–8:10', { recovery: '90 sec jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('strides', '3 mi easy + 4 strides', { note: 'No post-run lifting — race week.' }),
+    fri: D('rest', 'Rest'),
+    sat: D('race', '4-Mile Race — untimed / for fun', { warmup: '1–2 mi easy', cooldown: 'Easy CD', note: 'No target pace, run by feel. Hard group-run effort, not a test. Do not chase a time.' }),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- P2 Week 4 (Jul 6–12) ----
+  { n: 14, phase: 2, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '2 × 15 min @ 8:05', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
     thu: D('racepace', '3 × 1.5 mi @ 7:55–8:00', { recovery: '2 min rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '8 mi with 2 mi finish @ 8:20–8:30'),
+    sat: D('long', '9 mi, last 3 mi @ 8:15–8:25'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 10, phase: 2, days: {
+
+  // ---- P2 Week 5 (Jul 13–19) ----
+  { n: 15, phase: 2, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 15 min @ 8:00', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '30 min continuous @ 8:10–8:15', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('racepace', '3 × 1.5 mi @ 7:55–8:00', { recovery: '2 min rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    thu: D('racepace', '2 × 2 mi @ 7:55–8:00', { recovery: '3 min rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9 mi with 3 mi finish @ 8:15–8:25'),
+    sat: D('long', '9 mi, last 3 mi @ 8:15–8:25'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 11, phase: 2, days: {
+
+  // ---- P2 Week 6 (Jul 20–26) — CHECKPOINT ----
+  { n: 16, phase: 2, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '2 × 2 mi @ 8:05–8:10', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', checkpoint: true, note: 'CHECKPOINT: HR must stay controlled through Rep 2.' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('racepace', '2 × 2 mi @ 7:55–8:00', { recovery: '3 min rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '9 mi, last 3 mi @ 8:15–8:25'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ======== PHASE 3 — Race-Specific Conversion ========
+  // ---- P3 Week 1 (Jul 27 – Aug 2) ----
+  { n: 17, phase: 3, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '2 × 15 min @ 8:00–8:05', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('vo2', '5 × 3 min @ 7:20–7:30', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'HR 170–176 expected.', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '9–10 mi, last 3 mi @ 8:10–8:20'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- P3 Week 2 (Aug 3–9) ----
+  { n: 18, phase: 3, days: {
     mon: D('rest', 'Rest or easy 30 min'),
     tue: D('threshold', '30 min continuous @ 8:00–8:05', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('racepace', '2 × 2 mi @ 7:55–8:00', { recovery: '3 min rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9 mi with 3 mi finish @ 8:15–8:25'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-  { n: 12, phase: 2, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 2 mi @ 8:00–8:05', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', checkpoint: true, note: 'CHECKPOINT: HR must stay controlled through Rep 2.' }),
-    wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('racepace', '2 × 2 mi @ 7:55–8:00', { recovery: '3 min rest', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9 mi with 3 mi finish @ 8:15–8:25'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-
-  // ======== PHASE 3 ========
-  { n: 13, phase: 3, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 15 min @ 7:55–8:00', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
-    wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '5 × 3 min @ 7:20–7:30', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'HR will hit 170–176. Expected and appropriate.', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9–10 mi with 3 mi finish @ 8:10–8:20'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-  { n: 14, phase: 3, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '30 min continuous @ 7:55–8:00', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
-    wed: D('easy', 'Easy 3–4 mi'),
     thu: D('vo2', '5 × 3 min @ 7:20–7:30', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9–10 mi with 3 mi finish @ 8:10–8:20'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-  { n: 15, phase: 3, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 2 mi @ 7:50–7:55', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
-    wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '4 × 4 min @ 7:20–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9–10 mi with 3 mi finish @ 8:10–8:20'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-  { n: 16, phase: 3, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '35 min continuous @ 7:55', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
-    wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '4 × 4 min @ 7:20–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '10 mi with 4 mi finish @ 8:05–8:15'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-  { n: 17, phase: 3, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '3 × 2 mi @ 7:50–7:55', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
-    wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '5 × 4 min @ 7:15–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '10 mi with 4 mi finish @ 8:05–8:15'),
-    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
-  }},
-  { n: 18, phase: 3, days: {
-    mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 3 mi @ 7:50–7:55', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', checkpoint: true, note: 'CHECKPOINT: Third rep must hold. HR peak 168–172 acceptable.' }),
-    wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '5 × 4 min @ 7:15–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
-    fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '10 mi with 4 mi finish @ 8:05–8:15'),
+    sat: D('long', '9–10 mi, last 3 mi @ 8:10–8:20'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
 
-  // ======== PHASE 4 ========
-  { n: 19, phase: 4, days: {
+  // ---- P3 Week 3 (Aug 10–16) ----
+  { n: 19, phase: 3, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('threshold', '2 × 2 mi @ 7:48–7:52', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '2 × 2 mi @ 7:55–8:00', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('vo2', '4 × 3 min @ 7:15–7:20', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'Maintain ceiling.', strength: 'maintenance' }),
+    thu: D('vo2', '4 × 4 min @ 7:20–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9 mi with 3 mi finish @ 8:00–8:10'),
+    sat: D('long', '9–10 mi, last 3 mi @ 8:10–8:20'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 20, phase: 4, days: {
+
+  // ---- P3 Week 4 (Aug 17–23) ----
+  { n: 20, phase: 3, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('racepace', '4 × 1 mi @ 7:45–7:50', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('threshold', '35 min continuous @ 8:00', { warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('vo2', '4 × 4 min @ 7:20–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '10 mi, last 4 mi @ 8:05–8:15'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- P3 Week 5 (Aug 24–30) ----
+  { n: 21, phase: 3, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '3 × 2 mi @ 7:55–8:00', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('vo2', '5 × 4 min @ 7:15–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '10 mi, last 4 mi @ 8:05–8:15'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- P3 Week 6 (Aug 31 – Sep 6) — CHECKPOINT ----
+  { n: 22, phase: 3, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('threshold', '3 × 2 mi @ 7:55–8:00', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', checkpoint: true, note: 'CHECKPOINT: No fade in third rep. HR peak 168–172 acceptable.' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('vo2', '5 × 4 min @ 7:15–7:25', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '10 mi, last 4 mi @ 8:05–8:15'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ======== PHASE 4 — 5-Mile Calibration + Taper ========
+  // ---- P4 Week 1 (Sep 7–13) ----
+  { n: 23, phase: 4, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('racepace', '2 × 2 mi @ 7:53–7:57', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
     thu: D('vo2', '4 × 3 min @ 7:15–7:20', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
-    sat: D('long', '9 mi with 3 mi finish @ 8:00–8:10'),
+    sat: D('long', '9 mi, last 3 mi @ 8:05–8:15'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 21, phase: 4, days: {
+
+  // ---- P4 Week 2 (Sep 14–20) ----
+  { n: 24, phase: 4, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('racepace', '3 × 1.5 mi @ 7:45–7:50', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('racepace', '4 × 1 mi @ 7:50–7:55', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', 'Easy 3–4 mi'),
+    thu: D('vo2', '4 × 3 min @ 7:15–7:20', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    fri: D('rest', 'Rest or tennis'),
+    sat: D('long', '9 mi, last 3 mi @ 8:05–8:15'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
+  }},
+
+  // ---- P4 Week 3 (Sep 21–27) ----
+  { n: 25, phase: 4, days: {
+    mon: D('rest', 'Rest or easy 30 min'),
+    tue: D('racepace', '3 × 1.5 mi @ 7:50–7:55', { recovery: '2 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
     thu: D('vo2', '4 × 3 min @ 7:15–7:20', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
     sat: D('long', '7 mi easy'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 22, phase: 4, days: {
+
+  // ---- P4 Week 4 — Taper (Sep 28 – Oct 4) ----
+  { n: 26, phase: 4, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('taper', '3 × 8 min @ 7:48–7:52', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'Taper: quality at reduced volume.' }),
+    tue: D('racepace', '3 × 8 min @ 7:53–7:57', { recovery: '3 min jog', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', note: 'Taper: quality at reduced volume.' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('taper', '4 × 2 min @ 7:40–7:50', { recovery: 'Full recovery', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
+    thu: D('taper', '4 × 2 min @ 7:45–7:55', { recovery: 'Full recovery', warmup: '1.5–2 mi easy', cooldown: '1 mi easy', strength: 'maintenance' }),
     fri: D('rest', 'Rest or tennis'),
     sat: D('long', '6 mi easy'),
     sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
-  { n: 23, phase: 4, days: {
+
+  // ---- P4 Week 5 — Taper (Oct 5–11) ----
+  { n: 27, phase: 4, days: {
     mon: D('rest', 'Rest or easy 30 min'),
-    tue: D('taper', '3 × 5 min @ 7:45–7:50', { recovery: 'Full recovery', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    tue: D('racepace', '3 × 5 min @ 7:50–7:55', { recovery: 'Full recovery', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     wed: D('easy', 'Easy 3–4 mi'),
-    thu: D('taper', '3 × 2 min @ 7:45', { recovery: 'Full recovery', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
+    thu: D('taper', '3 × 2 min @ 7:50', { recovery: 'Full recovery', warmup: '1.5–2 mi easy', cooldown: '1 mi easy' }),
     fri: D('rest', 'Rest or tennis'),
     sat: D('long', '4 mi easy'),
-    sun: D('easy', 'Easy 3 mi or rest', { note: 'Light strength only this week.' }),
-  }},
-  { n: 24, phase: 4, days: {
-    mon: D('easy', '3 mi easy'),
-    tue: D('taper', '2 × 1 mi @ 7:50', { recovery: 'Full recovery', warmup: '1.5 mi easy', cooldown: '1 mi easy' }),
-    wed: D('easy', '3 mi easy'),
-    thu: D('strides', '3 mi + 4 strides', { note: 'Strides after easy miles, full recovery.' }),
-    fri: D('rest', 'Rest'),
-    sat: D('race', '5-MILE RACE', { note: 'Target 7:50–7:55/mi (~39:10–39:35). Mile 1 at 8:00–8:05, settle to 7:55 by mile 2, hold through mile 4, compete mile 5. Do NOT go under 7:50 in mile 1.' }),
-    sun: D('rest', 'Rest or easy shakeout'),
+    sun: D('easy', 'Easy 3 mi or rest', { strength: 'primary' }),
   }},
 
-  // ======== PHASE 5 (TBD until 5-mile result) ========
-  { n: 25, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
-  { n: 26, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
-  { n: 27, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
-  { n: 28, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
+  // ---- P4 Week 6 — Race Week (Oct 12–18) ----
+  { n: 28, phase: 4, days: {
+    mon: D('easy', '3 mi easy'),
+    tue: D('taper', '2 × 1 mi @ 7:55', { recovery: 'Full recovery', warmup: '1.5 mi easy', cooldown: '1 mi easy' }),
+    wed: D('easy', '3 mi easy'),
+    thu: D('strides', '3 mi + 4 strides', { note: 'No lifting.' }),
+    fri: D('rest', 'Rest'),
+    sat: D('race', '5-MILE RACE', { note: 'Strategy: mile 1 @ 8:05–8:10, settle to 8:00 by mile 2, hold through mile 4, compete mile 5. Do not go under 7:55 in mile 1. This race calibrates the final 10K block.' }),
+    sun: D('easy', 'Easy 3 mi or rest'),
+  }},
+
+  // ======== PHASE 5 (TBD until 5-mile result Oct 17) ========
   { n: 29, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
   { n: 30, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
 ];
@@ -504,7 +577,7 @@ export default function App() {
             <Hourglass className="w-6 h-6 mx-auto mb-3 text-stone-500"/>
             <div className="font-display text-lg text-stone-300" style={{ fontWeight: 500 }}>Phase 5 — To be built</div>
             <div className="text-sm text-stone-500 mt-2 max-w-md mx-auto">
-              Structure decided after the 5-mile race result on Sep 19. Four weeks of 10K-specific work at 7:45–7:50 pace, then a 2-week taper, then race day.
+              Structure decided after the 5-mile race result on Oct 17. Four weeks of 10K-specific work at 7:45–7:50 pace, then a 2-week taper, then race day.
             </div>
           </div>
         ) : (
