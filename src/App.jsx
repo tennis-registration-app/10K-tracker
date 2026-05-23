@@ -11,7 +11,7 @@ import {
 // =========================================================
 
 const PLAN_START = new Date(2026, 3, 6); // Mon April 6, 2026 (month is 0-indexed)
-const TOTAL_WEEKS = 30;
+const TOTAL_WEEKS = 34;
 const STORAGE_KEY = 'workout-status';
 
 const PHASES = [
@@ -31,7 +31,7 @@ const PHASES = [
     goal: 'Convert Phase 3 fitness into a 5-mile race result. Use the race to calibrate the final 10K block.',
     checkpoint: '5-mile race @ 7:55–8:00/mi. (Sat Oct 17)',
     accent: '#b91c1c' },
-  { num: 5, name: '10K Specific Block',         weeks: [29, 30],
+  { num: 5, name: '10K Specific Block',         weeks: [29, 30, 31, 32, 33, 34],
     goal: 'Final conversion: 10K-specific work → taper → goal race.',
     checkpoint: '10K @ 7:45/mi (~48:00).',
     accent: '#7c2d12' },
@@ -361,6 +361,10 @@ const WEEKS = [
   // ======== PHASE 5 (TBD until 5-mile result Oct 17) ========
   { n: 29, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
   { n: 30, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
+  { n: 31, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
+  { n: 32, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
+  { n: 33, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
+  { n: 34, phase: 5, tbd: true, days: { mon: D('rest','TBD'), tue: D('rest','TBD'), wed: D('rest','TBD'), thu: D('rest','TBD'), fri: D('rest','TBD'), sat: D('rest','TBD'), sun: D('rest','TBD') }},
 ];
 
 const DAY_KEYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -479,7 +483,7 @@ export default function App() {
                 <span className="num-feature text-amber-500" style={{ fontWeight: 600 }}>48:00</span>
               </h1>
               <div className="mt-2 text-sm text-stone-400">
-                Target pace <span className="font-mono text-stone-200">7:45/mi</span> · 30-week block
+                Target pace <span className="font-mono text-stone-200">7:45/mi</span> · 34-week block
               </div>
             </div>
             <div className="text-right hidden sm:block">
